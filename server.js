@@ -1,17 +1,19 @@
-const path = require('path');
+// Dependencies
 const express = require('express');
-const session = require('express-session');
+const sequelize = require('./config/connection');
+const routes = require('./controller');
+const path = require('path');
 const exphbs = require('express-handlebars');
+const hbs = exphbs.create({});
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+// Setting up app and port variables
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const sequelize = require('./config/connection');
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const helpers = require('./utils/helpers');
-
 const sess = {
-    secret: 'Super secret secret',
+    secret: 'rgdfg dfgdgf sedfgdfgcret',
     cookie: {},
     resave: false,
     saveUninitialized: true,
@@ -20,19 +22,15 @@ const sess = {
     })
   };
 
+// Preparing data to be parsed
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Middleware
+app.use(routes);
 app.use(session(sess));
 
-const hbs = exphbs.create({ helpers });
-
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(require('./controllers/'));
-
+// Initialize connection to the Sequelize database
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log('And...we are live!'));
+    app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
 });
