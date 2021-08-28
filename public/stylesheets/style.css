@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family: 'Inconsolata', monospace;
   }
   
   body, html {
@@ -80,6 +81,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 1%;
+    background-color: rgb(3, 0, 0);
+    font-size: 30px;
+    color: #0d6efd;
   }
   
   header h1 {
@@ -106,7 +110,7 @@
   
   .btn-no-style:hover {
     background: none;
-    color: #3486eb;
+    color: white;
   }
   
   .delete-post-btn {
