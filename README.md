@@ -10,7 +10,7 @@ A Blog website that is all about creating conversation in the tech world. On thi
 Link to site - 
 
 ## Credits
-The code utilized was from GW, mod 14. Styling was edited. 
+The code utilized was from GW, Module 14. Styling was edited. 
 
 ## Questions
 ### Please feel free to reach out to me on links provided:
